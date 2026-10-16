@@ -1,0 +1,73 @@
+@model List<LignePanier>
+@{
+    ViewData["Title"] = "Mon panier";
+    Restaurant restaurant = ViewBag.Restaurant;
+    decimal total = ViewBag.Total;
+}
+
+<h1>Mon panier</h1>
+
+<p>
+    @if (restaurant != null)
+    {
+        <span>Retrait au restaurant <strong>@restaurant.Nom</strong>.</span>
+        <a asp-action="ChoisirRestaurant">Changer de restaurant</a>
+    }
+    else
+    {
+        <span>Vous n'avez pas encore choisi de restaurant.</span>
+        <a asp-action="ChoisirRestaurant">Choisir mon restaurant</a>
+    }
+</p>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-secondary">
+        Votre panier est vide. <a asp-controller="Carte" asp-action="Index">Voir la carte</a>
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Article</th>
+                    <th>Sauce</th>
+                    <th class="text-end">Prix</th>
+                    <th class="text-end">Quantité</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @* On utilise « for » (et pas foreach) pour connaître la position de chaque ligne. *@
+                @for (int position = 0; position < Model.Count; position++)
+                {
+                    LignePanier ligne = Model[position];
+                    <tr>
+                        <td>@ligne.Libelle</td>
+                        <td>@(string.IsNullOrEmpty(ligne.Sauce) ? "—" : ligne.Sauce)</td>
+                        <td class="text-end">@ligne.PrixUnitaire.ToString("0.00") €</td>
+                        <td class="text-end">@ligne.Quantite</td>
+                        <td class="text-end">
+                            @* TODO S3-07 (sprint 3) : ajouter un bouton « Retirer » sur chaque ligne (C4).
+                                 Consigne : un petit formulaire qui envoie, en POST, la position de
+                                            la ligne à l'action Retirer de PanierController.
+                                 Indice   : imitez le formulaire « Ajouter » de Views/Carte/Index.cshtml,
+                                            avec un champ caché nommé « position ». *@
+                        </td>
+                    </tr>
+                }
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2">Total</th>
+                    <th class="text-end">@total.ToString("0.00") €</th>
+                    <th colspan="2"></th>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+
+    <a class="btn btn-dark" asp-controller="Commande" asp-action="Valider">Valider ma commande</a>
+}

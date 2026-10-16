@@ -1,0 +1,9 @@
+# BONNE PRATIQUE (bloc 3, SEC10) : Dependabot surveille les bibliothèques du
+# projet (MySqlConnector, Dapper, xUnit…). Quand une nouvelle version corrige
+# une faille, il ouvre tout seul une pull request : relisez-la, puis fusionnez-la.
+version: 2
+updates:
+  - package-ecosystem: "nuget"
+    directory: "/"
+    schedule:
+      interval: "weekly"

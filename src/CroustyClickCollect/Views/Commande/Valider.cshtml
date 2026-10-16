@@ -1,0 +1,61 @@
+@model List<LignePanier>
+@{
+    ViewData["Title"] = "Valider ma commande";
+    Restaurant restaurant = ViewBag.Restaurant;
+    List<DateTime> creneaux = ViewBag.Creneaux;
+    decimal total = ViewBag.Total;
+}
+
+<h1>Valider ma commande</h1>
+
+<p>
+    Retrait au restaurant <strong>@restaurant.Nom</strong> ·
+    Total : <strong>@total.ToString("0.00") €</strong> ·
+    Paiement sur place, au moment du retrait.
+</p>
+
+@if (ViewBag.Erreur != null)
+{
+    <div class="alert alert-danger">@ViewBag.Erreur</div>
+}
+
+@if (creneaux.Count == 0)
+{
+    <div class="alert alert-warning">
+        Aucun créneau de retrait n'est disponible pour le moment.
+        (Le TODO S4-01 de Services/CreneauService.cs est-il fait ?)
+    </div>
+}
+else
+{
+    <form asp-action="Valider" method="post" class="row g-3 formulaire">
+        <div class="col-12">
+            <label for="creneau" class="form-label">Créneau de retrait</label>
+            <select id="creneau" name="creneau" class="form-select">
+                @foreach (DateTime creneau in creneaux)
+                {
+                    @* value : la date complète (format standard) ; texte affiché : 12:30 – 12:45 *@
+                    <option value="@creneau.ToString("s")">@creneau.ToString("HH:mm") – @creneau.AddMinutes(15).ToString("HH:mm")</option>
+                }
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="prenom" class="form-label">Prénom</label>
+            <input id="prenom" name="prenom" class="form-control" maxlength="50" autocomplete="given-name" required />
+        </div>
+        <div class="col-md-6">
+            <label for="telephone" class="form-label">Téléphone</label>
+            <input id="telephone" name="telephone" type="tel" class="form-control" maxlength="20" autocomplete="tel" required />
+        </div>
+        @* « required » demande au navigateur de vérifier que le champ est rempli. C'est
+           pratique, mais pas suffisant : un utilisateur peut retirer cette vérification.
+           Le serveur doit donc vérifier lui aussi (TODO S4-05). *@
+        <p class="col-12 small text-muted mb-0">
+            Votre prénom et votre téléphone servent uniquement à préparer et retirer votre commande.
+            <a asp-controller="Home" asp-action="Confidentialite">Politique de confidentialité</a>
+        </p>
+        <div class="col-12">
+            <button type="submit" class="btn btn-dark">Confirmer la commande</button>
+        </div>
+    </form>
+}

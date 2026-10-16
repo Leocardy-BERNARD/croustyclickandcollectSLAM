@@ -1,0 +1,34 @@
+# =====================================================================
+#  Intégration continue : le « robot » de GitHub (GitHub Actions).
+#  À chaque push et à chaque pull request, il :
+#   1. récupère le code ;
+#   2. installe .NET 10 ;
+#   3. compile le projet ;
+#   4. lance les tests unitaires.
+#  Coche verte = tout va bien. Croix rouge = cliquez dessus pour lire l'erreur.
+#  Rien à modifier dans ce fichier.
+# =====================================================================
+name: Compilation et tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  verifier:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le code
+        uses: actions/checkout@v4
+
+      - name: Installer .NET 10
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "10.0.x"
+
+      - name: Compiler
+        run: dotnet build CroustyClickCollect.sln
+
+      - name: Lancer les tests
+        run: dotnet test CroustyClickCollect.sln --no-build

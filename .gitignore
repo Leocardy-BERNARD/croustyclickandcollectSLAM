@@ -1,0 +1,18 @@
+# Ce fichier liste ce que Git ne doit JAMAIS envoyer sur GitHub.
+
+# Fichiers fabriqués par la compilation (ils se recréent tout seuls)
+bin/
+obj/
+
+# Réglages personnels de Visual Studio (propres à chaque ordinateur)
+.vs/
+*.user
+*.suo
+
+# BONNE PRATIQUE (bloc 3) : le fichier .env contient des mots de passe.
+# Il reste sur votre ordinateur et ne part jamais sur GitHub.
+.env
+
+# Fichiers créés par le système d'exploitation
+.DS_Store
+Thumbs.db

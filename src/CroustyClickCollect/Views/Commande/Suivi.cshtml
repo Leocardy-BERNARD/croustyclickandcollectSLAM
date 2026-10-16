@@ -1,0 +1,28 @@
+@{
+    ViewData["Title"] = "Suivi de commande";
+}
+
+<h1>Suivi de ma commande n° @ViewBag.Numero</h1>
+
+@if (ViewBag.Etat == null)
+{
+    <div class="alert alert-warning">
+        Commande introuvable : vérifiez le numéro et le code de retrait.
+        (Le suivi fonctionnera quand le TODO S6-01 sera fait.)
+    </div>
+}
+else
+{
+    @* Les attributs data-numero et data-code transmettent les informations au JavaScript. *@
+    <p class="fs-4">
+        État : <strong id="etat" data-numero="@ViewBag.Numero" data-code="@ViewBag.Code">@ViewBag.Etat</strong>
+    </p>
+    <p class="small text-muted">Cette page se met à jour toute seule, toutes les 10 secondes.</p>
+}
+
+@section Scripts {
+    @if (ViewBag.Etat != null)
+    {
+        <script src="~/js/suivi.js"></script>
+    }
+}

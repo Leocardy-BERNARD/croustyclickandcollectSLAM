@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "Commande enregistrée";
+}
+
+<div class="card formulaire">
+    <div class="card-body">
+        <h1 class="h3">Merci, votre commande est enregistrée</h1>
+        <p>Numéro de commande : <strong>@ViewBag.Numero</strong></p>
+        <p>Code de retrait à donner au comptoir : <strong class="fs-3">@ViewBag.Code</strong></p>
+        <p>Paiement sur place, au moment du retrait.</p>
+        <a class="btn btn-dark" href="@Url.Action("Suivi", new { id = ViewBag.Numero, code = ViewBag.Code })">Suivre ma commande</a>
+    </div>
+</div>

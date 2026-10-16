@@ -1,0 +1,47 @@
+@model List<Commande>
+@{
+    ViewData["Title"] = "Écran cuisine";
+}
+
+<h1>Écran cuisine</h1>
+<p class="text-muted">Bonjour @User.Identity.Name. Voici les commandes du jour, par heure de retrait.</p>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-secondary">
+        Aucune commande pour aujourd'hui. (Les TODO S5-03 et S5-04 sont-ils faits ?)
+    </div>
+}
+
+<div class="row g-3">
+    @foreach (Commande commande in Model)
+    {
+        <div class="col-md-6 col-lg-4">
+            <div class="card h-100">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <strong class="fs-4">@commande.CreneauRetrait.ToString("HH:mm")</strong>
+                        <span class="badge text-bg-dark">@commande.Etat</span>
+                    </div>
+                    <p class="mb-2">N° @commande.Id · @commande.PrenomClient · code @commande.CodeRetrait</p>
+                    <ul class="mb-3">
+                        @foreach (LigneCommande ligne in commande.Lignes)
+                        {
+                            <li>
+                                @ligne.Quantite × @ligne.Produit
+                                @if (!string.IsNullOrEmpty(ligne.Sauce))
+                                {
+                                    <span>(@ligne.Sauce)</span>
+                                }
+                            </li>
+                        }
+                    </ul>
+                    <form asp-action="AvancerEtat" method="post">
+                        <input type="hidden" name="id" value="@commande.Id" />
+                        <button type="submit" class="btn btn-sm btn-dark">Étape suivante</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    }
+</div>

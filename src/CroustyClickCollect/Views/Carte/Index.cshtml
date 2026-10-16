@@ -1,0 +1,76 @@
+@* La vue reçoit une liste de produits : c'est son « modèle » (Model). *@
+@model List<Produit>
+@{
+    ViewData["Title"] = "La carte";
+    List<Sauce> sauces = ViewBag.Sauces;
+}
+
+<h1>La carte</h1>
+
+@if (Model.Count == 0)
+{
+    <div class="alert alert-warning">
+        La carte est vide pour l'instant : écrivez le TODO S1-03 (Data/ProduitRepository.cs)
+        pour lire les produits dans la base.
+    </div>
+}
+else
+{
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead>
+                <tr>
+                    <th>Produit</th>
+                    <th>Catégorie</th>
+                    <th class="text-end">Prix</th>
+                    <th>Commander</th>
+                </tr>
+            </thead>
+            <tbody>
+                @* @foreach répète la ligne du tableau pour chaque produit de la liste. *@
+                @foreach (Produit produit in Model)
+                {
+                    <tr>
+                        <td>
+                            <strong>@produit.Libelle</strong>
+                            <div class="small text-muted">@produit.Description</div>
+                            @* TODO S7-01 (sprint 7) : afficher les allergènes de chaque produit (V5).
+                                 Consigne : sous la description, afficher « Allergènes : … » seulement
+                                            si le produit en a (la colonne peut être vide).
+                                 Indice   : @if (!string.IsNullOrEmpty(...)) { ... } ; regardez comment
+                                            Views/Cuisine/Index.cshtml affiche la sauce seulement si elle existe. *@
+                        </td>
+                        <td>@produit.Categorie</td>
+                        <td class="text-end">
+                            @* TODO S1-04 (sprint 1) : afficher le prix du produit.
+                                 Consigne : afficher le prix avec 2 chiffres après la virgule,
+                                            suivi du symbole € (exemple : 9,00 €).
+                                 Indice   : @produit.Libelle affiche le nom, juste au-dessus ;
+                                            pour le format, cherchez ToString("0.00"). *@
+                        </td>
+                        <td>
+                            @* Formulaire « Ajouter au panier » : il envoie l'id du produit,
+                               la sauce et la quantité à PanierController.Ajouter (en POST). *@
+                            <form asp-controller="Panier" asp-action="Ajouter" method="post" class="d-flex flex-wrap gap-2">
+                                <input type="hidden" name="produitId" value="@produit.Id" />
+                                @if (produit.Categorie == "plat")
+                                {
+                                    <select name="sauceId" class="form-select form-select-sm w-auto" aria-label="Sauce">
+                                        <option value="">Sans sauce</option>
+                                        @foreach (Sauce sauce in sauces)
+                                        {
+                                            <option value="@sauce.Id">@sauce.Libelle</option>
+                                        }
+                                    </select>
+                                }
+                                <input type="number" name="quantite" value="1" min="1" max="10"
+                                       class="form-control form-control-sm quantite" aria-label="Quantité" />
+                                <button type="submit" class="btn btn-sm btn-dark">Ajouter</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

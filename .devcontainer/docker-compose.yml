@@ -1,0 +1,32 @@
+# =====================================================================
+#  Les deux « machines » du Codespace :
+#   - app : là où vous travaillez (.NET 10, Git, terminal) ;
+#   - db  : le serveur MariaDB (compatible MySQL, comme dans XAMPP).
+#  Au premier démarrage, db exécute automatiquement les scripts du
+#  dossier sql/, dans l'ordre (01, 02, 03) : la base est prête.
+# =====================================================================
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/dotnet:2-10.0
+    volumes:
+      - ../..:/workspaces:cached
+    # Garde la machine allumée pendant que vous travaillez.
+    command: sleep infinity
+    # app partage le réseau de db : la base est donc joignable à l'adresse
+    # 127.0.0.1, exactement comme sur un poste du lycée.
+    network_mode: service:db
+
+  db:
+    image: mariadb:11.4
+    restart: unless-stopped
+    environment:
+      # Mot de passe « root » de CE conteneur de développement uniquement.
+      # Il ne protège aucune vraie donnée et ne sert nulle part ailleurs.
+      MARIADB_ROOT_PASSWORD: racine_dev
+      TZ: Europe/Paris
+    volumes:
+      - ../sql:/docker-entrypoint-initdb.d:ro
+      - donnees-mariadb:/var/lib/mysql
+
+volumes:
+  donnees-mariadb:

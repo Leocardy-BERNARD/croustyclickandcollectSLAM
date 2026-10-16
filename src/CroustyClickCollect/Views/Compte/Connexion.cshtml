@@ -1,0 +1,27 @@
+@{
+    ViewData["Title"] = "Espace personnel";
+}
+
+<div class="card formulaire">
+    <div class="card-body">
+        <h1 class="h4">Connexion du personnel</h1>
+
+        @if (ViewBag.Erreur != null)
+        {
+            <div class="alert alert-danger">@ViewBag.Erreur</div>
+        }
+
+        <form asp-action="Connexion" method="post">
+            <div class="mb-3">
+                <label for="identifiant" class="form-label">Identifiant</label>
+                <input id="identifiant" name="identifiant" class="form-control" autocomplete="username" required />
+            </div>
+            <div class="mb-3">
+                <label for="motDePasse" class="form-label">Mot de passe</label>
+                <input id="motDePasse" name="motDePasse" type="password" class="form-control"
+                       autocomplete="current-password" required />
+            </div>
+            <button type="submit" class="btn btn-dark">Se connecter</button>
+        </form>
+    </div>
+</div>

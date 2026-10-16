@@ -1,0 +1,30 @@
+// =====================================================================
+//  Configuration du Codespace (environnement de développement en ligne).
+//  Elle prépare tout automatiquement : .NET 10, MySQL avec la base
+//  « crousty » déjà remplie, et le fichier .env.
+//  Rien à modifier : voir README > Installation dans un Codespace.
+// =====================================================================
+{
+    "name": "Crousty Click & Collect",
+    "dockerComposeFile": "docker-compose.yml",
+    "service": "app",
+    "workspaceFolder": "/workspaces/${localWorkspaceFolderBasename}",
+
+    // Le site écoute sur le port 5000 : le Codespace propose de l'ouvrir dans le navigateur.
+    "forwardPorts": [5000],
+    "portsAttributes": {
+        "5000": { "label": "Site Crousty", "onAutoForward": "openBrowser" }
+    },
+
+    // Les dates et heures sont celles de Paris (utile pour les créneaux de retrait).
+    "containerEnv": { "TZ": "Europe/Paris" },
+
+    // À la création : copie .env.example en .env (s'il n'existe pas) et télécharge les bibliothèques.
+    "postCreateCommand": "cp -n .env.example .env; dotnet restore",
+
+    "customizations": {
+        "vscode": {
+            "extensions": ["ms-dotnettools.csdevkit"]
+        }
+    }
+}

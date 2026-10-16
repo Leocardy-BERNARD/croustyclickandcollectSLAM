@@ -1,0 +1,33 @@
+/* =====================================================================
+   Styles propres au site. Bootstrap fait l'essentiel ; ici, seulement
+   les couleurs de l'enseigne : le doré de la barquette et le noir.
+   ===================================================================== */
+
+:root {
+    --crousty-dore: #F3C54A;
+    --crousty-noir: #1C1A17;
+}
+
+.bandeau {
+    background-color: var(--crousty-noir);
+}
+
+.bandeau .navbar-brand {
+    color: var(--crousty-dore);
+}
+
+.accueil {
+    background-color: var(--crousty-dore);
+}
+
+.formulaire {
+    max-width: 36rem;
+}
+
+.quantite {
+    width: 5rem;
+}
+
+.pied a {
+    color: inherit;
+}

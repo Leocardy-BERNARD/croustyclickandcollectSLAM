@@ -1,0 +1,42 @@
+@{
+    ViewData["Title"] = "Accueil";
+}
+
+<section class="accueil p-4 p-md-5 mb-4 rounded-3">
+    <h1 class="display-5 fw-bold">Le crousty, sans faire la queue</h1>
+
+    @* TODO S1-05 (sprint 1) : écrire le texte de présentation de l'enseigne (V1).
+         Consigne : remplacer le paragraphe entre crochets par 2 ou 3 phrases qui présentent
+                    Tasty Crousty et le principe : on commande en ligne, on vient chercher sa barquette.
+         Indice   : le contexte est décrit dans la section 1 du cahier des charges. *@
+    <p class="lead">[Texte de présentation à écrire]</p>
+
+    <a class="btn btn-dark btn-lg" asp-controller="Panier" asp-action="ChoisirRestaurant">Commander</a>
+    <a class="btn btn-outline-dark btn-lg" asp-controller="Carte" asp-action="Index">Voir la carte</a>
+</section>
+
+@* TODO S7-02 (sprint 7) : retirer ce bloc de vérification avant la démonstration finale.
+     Consigne : supprimer la section « Vérification de l'installation » ci-dessous.
+     Indice   : elle sert pendant le développement ; un visiteur n'a pas à la voir. *@
+<section class="card">
+    <div class="card-body">
+        <h2 class="h5">Vérification de l'installation</h2>
+        @if (ViewBag.BaseOk == true)
+        {
+            <p class="text-success mb-0">✔ Base de données connectée : @ViewBag.NombreProduits produits trouvés.</p>
+        }
+        else
+        {
+            <p class="text-danger">✘ Le site n'arrive pas à lire la base de données. Vérifiez :</p>
+            <ol>
+                <li>MySQL est démarré (XAMPP : bouton « Start » sur la ligne MySQL) ;</li>
+                <li>les 3 scripts du dossier <code>sql/</code> ont été exécutés, dans l'ordre ;</li>
+                <li>le fichier <code>.env</code> existe (copie de <code>.env.example</code>).</li>
+            </ol>
+            @if (ViewBag.MessageErreur != null)
+            {
+                <p class="small text-muted mb-0">Message technique : @ViewBag.MessageErreur</p>
+            }
+        }
+    </div>
+</section>
