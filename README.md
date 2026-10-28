@@ -19,7 +19,7 @@ Projet réalisé en équipe, en méthode Scrum, dans le cadre du **BTS SIO optio
 -->
 
 | Prénom Nom | Pseudo GitHub | Scrum Master au sprint |
-|---|---|---|
+|leocardy Bernard|Leocardy-BERNARD|1|
 | _À compléter_ | _À compléter_ | _À compléter_ |
 
 ---
