@@ -24,7 +24,6 @@ Projet réalisé en équipe, en méthode Scrum, dans le cadre du **BTS SIO optio
 |Idriss Abdou|idrissabdou-cyber|2 et 6|
 |Chadi El Horche |lebgndrr|3 et 7|
 |Cindy Albarel|cindyalbarel624-shit-it|4|
-| _À compléter_ | _À compléter_ | _À compléter_ |
 
 ---
 
