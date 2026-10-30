@@ -20,7 +20,10 @@ Projet réalisé en équipe, en méthode Scrum, dans le cadre du **BTS SIO optio
 
 | Prénom Nom | Pseudo GitHub | Scrum Master au sprint |
 |---|---|---|
-| _À compléter_ | _À compléter_ | _À compléter_ |
+|Leocardy Bernard|Leocardy-BERNARD|1 et 5|
+|Idriss Abdou|idrissabdou-cyber|2 et 6|
+|Chadi El Horche |lebgndrr|3 et 7|
+|Cindy Albarel|cindyalbarel624-ship-it|4|
 
 ---
 
