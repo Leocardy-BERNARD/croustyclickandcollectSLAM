@@ -16,25 +16,25 @@ public class HorairesServiceTests
     //              test ci-dessous, puis lancez « dotnet test » : tout doit être vert.
     //   Indice   : dans Visual Studio, menu Test > Explorateur de tests > Exécuter tout.
 
-    [Fact(Skip = "Sprint 2 : à activer (TODO S2-03)")]
+    [Fact]
     public void EstOuvert_PileALOuverture_Ouvert()
     {
         Assert.True(HorairesService.EstOuvert(Ouverture, Fermeture, new TimeSpan(11, 30, 0)));
     }
 
-    [Fact(Skip = "Sprint 2 : à activer (TODO S2-03)")]
+    [Fact]
     public void EstOuvert_UneMinuteAvantLOuverture_Ferme()
     {
         Assert.False(HorairesService.EstOuvert(Ouverture, Fermeture, new TimeSpan(11, 29, 0)));
     }
 
-    [Fact(Skip = "Sprint 2 : à activer (TODO S2-03)")]
+    [Fact]
     public void EstOuvert_EnPleinMidi_Ouvert()
     {
         Assert.True(HorairesService.EstOuvert(Ouverture, Fermeture, new TimeSpan(12, 45, 0)));
     }
 
-    [Fact(Skip = "Sprint 2 : à activer (TODO S2-03)")]
+    [Fact]
     public void EstOuvert_PileALaFermeture_Ferme()
     {
         Assert.False(HorairesService.EstOuvert(Ouverture, Fermeture, new TimeSpan(23, 0, 0)));
