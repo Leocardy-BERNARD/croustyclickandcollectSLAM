@@ -45,11 +45,8 @@ public class ProduitRepository
 
     public Produit GetParId(int id)
     {
-        // TODO S3-01 (sprint 3) : lire UN produit à partir de son identifiant.
-        //   Consigne : renvoyer le produit dont l'id est reçu, ou null s'il n'existe pas.
-        //   Indice   : regardez RestaurantRepository.GetParId(), qui fait la même chose
-        //              pour un restaurant. Dans le SQL, la valeur s'écrit @id : ne collez
-        //              JAMAIS la valeur dans le texte (risque d'injection SQL, voir README).
-        return null;
+        using var connexion = _bdd.CreerConnexion();
+        string sql = "SELECT * FROM produit WHERE id = @id";
+        return connexion.QueryFirstOrDefault<Produit>(sql, new { id });
     }
 }
