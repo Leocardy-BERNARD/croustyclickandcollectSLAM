@@ -42,10 +42,7 @@ public static class PanierSession
 
     public static void EnregistrerRestaurant(ISession session, int restaurantId)
     {
-        // TODO S3-02 (sprint 3) : mémoriser le restaurant choisi par le visiteur (C1).
-        //   Consigne : ranger restaurantId dans la session, sous la clé CleRestaurant.
-        //   Indice   : la session fonctionne comme un dictionnaire. Regardez comment
-        //              LireRestaurant() relit la valeur juste au-dessus : il existe
-        //              une méthode « Set… » qui fait l'inverse.
+        
+        session.SetInt32(CleRestaurant,restaurantId);
     }
 }
