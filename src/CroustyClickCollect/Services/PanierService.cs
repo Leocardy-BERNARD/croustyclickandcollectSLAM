@@ -26,11 +26,16 @@ public static class PanierService
 
     public static void Ajouter(List<LignePanier> panier, LignePanier nouvelle)
     {
-        // TODO S3-03 (sprint 3) : ajouter un article au panier (C2, C3).
-        //   Consigne : si le panier contient déjà le même produit avec la même sauce,
-        //              augmenter sa quantité ; sinon, ajouter la nouvelle ligne à la liste.
-        //   Indice   : parcourez le panier avec foreach et comparez ProduitId ET SauceId.
-        //              Une méthode s'arrête tout de suite avec « return; ».
+        foreach (var ligne in panier)
+        {
+            if (ligne.ProduitId == nouvelle.ProduitId && ligne.SauceId == nouvelle.SauceId)
+            {
+                ligne.Quantite = ligne.Quantite + nouvelle.Quantite;
+                return;
+            }
+        }
+
+        panier.Add(nouvelle);
     }
 
     public static decimal CalculerTotal(List<LignePanier> panier)
