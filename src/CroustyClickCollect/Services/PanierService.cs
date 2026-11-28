@@ -38,7 +38,7 @@ public static class PanierService
         panier.Add(nouvelle);
     }
 
-       public static decimal CalculerTotal(List<LignePanier> panier)
+    public static decimal CalculerTotal(List<LignePanier> panier)
     {
         decimal total = 0;
         foreach (LignePanier ligne in panier)
@@ -47,6 +47,7 @@ public static class PanierService
         }
         return total;
     }
+    
     public static void Retirer(List<LignePanier> panier, int position)
     {
         // TODO S3-05 (sprint 3) : retirer une ligne du panier (C4).
