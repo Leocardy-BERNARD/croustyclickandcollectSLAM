@@ -40,12 +40,14 @@ public static class PanierService
 
     public static decimal CalculerTotal(List<LignePanier> panier)
     {
-        // TODO S3-04 (sprint 3) : calculer le total du panier (C4).
-        //   Consigne : additionner prix unitaire × quantité pour chaque ligne.
-        //   Indice   : même principe que CompterArticles() juste au-dessus.
-        return 0;
+        decimal total = 0;
+        foreach (LignePanier ligne in panier)
+        {
+            total = total + ligne.PrixUnitaire * ligne.Quantite;
+        }
+        return total;
     }
-
+    
     public static void Retirer(List<LignePanier> panier, int position)
     {
         // TODO S3-05 (sprint 3) : retirer une ligne du panier (C4).
