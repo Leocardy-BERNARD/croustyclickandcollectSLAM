@@ -47,13 +47,13 @@ public static class PanierService
         }
         return total;
     }
-    
+
     public static void Retirer(List<LignePanier> panier, int position)
     {
-        // TODO S3-05 (sprint 3) : retirer une ligne du panier (C4).
-        //   Consigne : supprimer la ligne qui se trouve à la position reçue
-        //              (0 = la première). Si la position n'existe pas, ne rien faire.
-        //   Indice   : une liste a une propriété Count et une méthode RemoveAt(position).
+        if (position >= 0 && position < panier.Count)
+        {
+            panier.RemoveAt(position);
+        }
     }
 
     public static bool PeutAjouter(List<LignePanier> panier, int quantite)
